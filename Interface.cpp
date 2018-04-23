@@ -63,17 +63,30 @@ int main() {
 			std::cout << "IC";
 		}
 
-	Case:
-		(component = 0)
+	
+		if (display.button() && display.mouse_x() >= 0 && display.mouse_y() >= 0)
 		{
-			if (display.button() && display.mouse_x() >= 0 && display.mouse_y() >= 0)
-			{
-				const int x = display.mouse_x();
-				const int y = display.mouse_y();
+			const int x = display.mouse_x();
+			const int y = display.mouse_y();
 
-				PCB.draw_rectangle(x - 14, y - 32, x + 14, y - 4, White); // Draw White square
-				PCB.draw_rectangle(x - 14, y + 4, x + 14, y + 32, White); // Draw White square	
-			}
+			// **** IC **** //
+			PCB.draw_rectangle(x - 2, y - 26, x - 10, y - 12, White); 
+			PCB.draw_rectangle(x - 14, y - 26, x - 22, y - 12, White); 
+			PCB.draw_rectangle(x + 2, y - 26, x + 10, y - 12, White); 
+			PCB.draw_rectangle(x + 14, y - 26, x + 22, y - 12, White); 
+			PCB.draw_rectangle(x - 2, y + 26, x - 10, y + 12, White); 
+			PCB.draw_rectangle(x - 14, y + 26, x - 22, y + 12, White); 
+			PCB.draw_rectangle(x + 2, y + 26, x + 10, y + 12, White); 
+			PCB.draw_rectangle(x + 14, y + 26, x + 22, y + 12, White); 
+
+			// **** TRANSISTOR ****//
+			PCB.draw_rectangle(x - 6, y - 24, x + 6, y - 4, White); 
+			PCB.draw_rectangle(x - 8, y + 4, x - 20, y + 24, White); 	
+			PCB.draw_rectangle(x + 8, y + 4, x + 20, y + 24, White); 
+
+			// **** RESISTOR, CAPACITOR, LED **** //
+			PCB.draw_rectangle(x - 14, y - 32, x + 14, y - 4, White); // Draw White square
+			PCB.draw_rectangle(x - 14, y + 4, x + 14, y + 32, White); // Draw White square	
 		}
 
 		PCB.display(display); // Display PCB layout interface
