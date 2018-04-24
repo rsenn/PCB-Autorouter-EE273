@@ -1,7 +1,7 @@
 // ********** NODE.H ********** //
 // Header file for coord and node classes, used for storing parameters about nodes and coordinates on the board
 
-// Developed by Martin Riis
+// Developed by Martin Riis and Nathan Bryson
 // EE273 - Engineering for Software Design
 // University of Strathclyde
 

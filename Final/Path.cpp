@@ -5,7 +5,7 @@
 // EE273 - Engineering for Software Design
 // University of Strathclyde
 
-// Last Edited: 11:59 23/04/2018
+// Last Edited: 11:23 24/04/2018
 
 #include "Path.h"
 #include "Node.h"
@@ -14,22 +14,6 @@
 using namespace cimg_library;
 
 unsigned int green[3] = { 0, 255, 0 }; // RGB colour of green
-
-/*void findThePath(node start, node end, node nodes[PCBLength][PCBWidth][PCBLayers], vector<node> *output) {
-	vector<node> temp; // Temporary variable to hold output from findPath function
-	temp = findPath(start, end, nodes); // Calls findPath function
-	for (int i = 0; i < temp.size(); i++) {
-		(*output).push_back(temp[i]); // Adds each node in path to output
-	}
-}*/
-
-/*void find(coord start, coord end, node nodes[PCBLength][PCBWidth][PCBLayers], vector<node> *output) {
-	//(*output)[0].set('x', 54);
-	node startN, endN;
-	startN.set(start);
-	endN.set(end);
-	(*output) = findPath(startN, endN, nodes);
-}*/
 
 vector<node> findPath(node start, node end, node nodes[PCBLength][PCBWidth][PCBLayers], CImg<unsigned char> *PCB) {
 	node current = start; // Current node equals start node
@@ -58,9 +42,7 @@ vector<node> findPath(node start, node end, node nodes[PCBLength][PCBWidth][PCBL
 		}
 
 		// *** FINDS SHORTEST DISTANCE *** //
-		//shortestDistance = endDistance[0] + neighbourDistance[0]; // Shortest distance from current node to end via neighbour 0
 		shortestDistance = std::numeric_limits<int>::max(); // Shortest distance from current node to end via neighbour 0
-		//std::cout << shortestDistance << std::endl;
 		for (int j = 0; j < distances.size(); j++) { // Loop count = number of neighbours
 			// *** AT END NODE *** //
 			if (endDistance[j] == 0) { // One of the neighbours is the end node
@@ -73,7 +55,6 @@ vector<node> findPath(node start, node end, node nodes[PCBLength][PCBWidth][PCBL
 
 			// *** SHORTER PATH FOUND *** //
 			else if ((distances[j] <= shortestDistance) && currentNeighbours[j].isOccupied(nodes) == false) { // Current distance is less than current shortest distance
-				//cout << "Updated" << endl;
 				shortestDistance = distances[j]; // Updates shortestDistance
 				current = currentNeighbours[j]; // Updates current node
 			}
@@ -92,28 +73,16 @@ vector<node> findPath(node start, node end, node nodes[PCBLength][PCBWidth][PCBL
 				continue; // End node not reached, continue searching
 			}
 		}
-
 		nodes[current.get('x')][current.get('y')][current.get('z')].isOccupied(true, nodes); // Updates master node array data
 	}
 
-	for (int i = 0; i < path.size() - 1; i++) {
-		for (int dx = -1 * keepOut; dx <= keepOut; ++dx) { // Loops through possible delta x values
-			for (int dy = -1 * keepOut; dy <= keepOut; ++dy) { // Loops through possible delta y values
-				if (path[i].get('x') + dx < 0 || path[i].get('y') + dy < 0) {
-					continue;
-				}
-				else {
-					//nodes[path[i].get('x') + dx][path[i].get('y') + dy][path[i].get('z')].isOccupied(true, nodes); // Allows for keepout zone around trace
-					//cout << path[i].get('z') << " - " << path[i + 1].get('z') << endl;
-				}
-			}
-		}
+
+	for (int i = 0; i < path.size() - 1; i++) { // Loops through all locations in the path
 		if (path[i].get('z') != path[i + 1].get('z')) { //If z coordinates are different
 			nodes[path[i].get('x')][path[i].get('y')][path[i].get('z')].via = true; // Adds via
 			int viaX, viaY; // Via x and y coordinates
 			coord2cimg(path[i], &viaX, &viaY);
 			(*PCB).draw_circle(viaX, viaY, viaRadius, green);
-			//PCB.display(display);
 			cout << "Placed via" << endl;
 		}
 		iteration++;

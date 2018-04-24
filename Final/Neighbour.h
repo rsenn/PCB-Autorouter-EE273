@@ -17,6 +17,6 @@
 vector<node>findNeighbours(int, int, int); // Find neighbours of coordinate
 // Arguments = x, y, z coordinates of point
 
-bool testPlace(node, int, node[PCBLength][PCBWidth][PCBLayers], vector<node>);
+bool testPlace(node, int, node[PCBLength][PCBWidth][PCBLayers], vector<node>); // Test if a node can be placed on specified location
 
 #endif

@@ -16,15 +16,15 @@
 
 using namespace cimg_library;
 
-void findThePath(node, node, node[PCBLength][PCBWidth][PCBLayers]);
+//void findThePath(node, node, node[PCBLength][PCBWidth][PCBLayers]);
 
-void findThePath(coord, coord, node[PCBLength][PCBWidth][PCBLayers]);
+//void findThePath(coord, coord, node[PCBLength][PCBWidth][PCBLayers]);
 
-void find(coord, coord, node[PCBLength][PCBWidth][PCBLayers], vector<node>*);
+//void find(coord, coord, node[PCBLength][PCBWidth][PCBLayers], vector<node>*);
 
 vector<node> findPath(node, node, node[PCBLength][PCBWidth][PCBLayers], CImg<unsigned char>*);
 
 float findLength(vector<node>);
 
-void fill(coord, coord);
+//void fill(coord, coord);
 #endif

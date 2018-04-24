@@ -5,7 +5,7 @@
 // EE273 - Engineering for Software Design
 // University of Strathclyde
 
-// Last Edited: 11:59 23/04/2018
+// Last Edited: 14:15 24/04/2018
 
 #include "Node.h"
 #include "Neighbour.h"
@@ -126,7 +126,6 @@ int main() {
 				for (int x = rectA1.get('x'); x < rectA1.get('x'); x++) {
 					for (int y = rectA1.get('y'); y < rectA2.get('y'); y++) {
 						nodes[x][y][1].isOccupied(true, nodes);
-						cout << nodes[x][y][1].isOccupied(nodes);
 					}
 				}
 				PCB.draw_rectangle(x - 14, y + 4, x + 14, y + 32, red); // Draw coloured square
@@ -321,10 +320,6 @@ int main() {
 
 		// User presses autoroute button
 		else if (display.button() && display.mouse_x() >= 560 && display.mouse_x() <= 680 && display.mouse_y() >= 25 && display.mouse_y() <= 50) {
-			if (connections.size() < 3) {
-				std::cout << "ERROR : Add at least 2 different connections before autorouting!" << std::endl;
-			}
-
 			for (int i = 0; i < connections.size(); i++) {
 				node currentStart, currentEnd;
 				vector<node> currentPath;
@@ -336,21 +331,9 @@ int main() {
 					coord2cimg(currentPath[j], &xStart, &yStart);
 					coord2cimg(currentPath[j], &xEnd, &yEnd);
 					PCB.draw_line(xStart, yStart, xEnd, yEnd, red);
-
-					nodes[xStart][yStart]->isOccupied(true, nodes);
-					std::cout << nodes[xStart][yStart]->isOccupied(nodes);
-					nodes[xEnd][yEnd]->isOccupied(true, nodes);
 				}
 			}
 
-			for (int j = 0; j < path.size(); j++) {
-				for (int k = 0; k < path[j].size() - 1; k++) {
-					int xStart, yStart, xEnd, yEnd; // Starting and ending values in cimg coordinate system
-					coord2cimg(path[j][k], &xStart, &yStart); // Converts start values to cimg coordinate system
-					coord2cimg(path[j][k + 1], &xEnd, &yEnd); // Converts end values to cimg coordinate system
-					PCB.draw_line(xStart, yStart, xEnd, yEnd, red);
-				}
-			}
 			PCB.display(display);
 		}
 
