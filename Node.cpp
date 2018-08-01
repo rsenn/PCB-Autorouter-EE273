@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Node.h"
 
 node::node() {
